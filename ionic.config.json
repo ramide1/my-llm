@@ -1,0 +1,7 @@
+{
+  "name": "myllm",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

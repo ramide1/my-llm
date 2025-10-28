@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ chat.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <main #main>
+    <ul>
+      @for (message of chat.messages; track message) {
+      <li class="message {{(message.role == 'assistant') ? 'bot' : 'user'}}">
+        <span>{{(message.role == 'assistant') ? 'Llm' : 'User'}}</span>
+        <p>{{message.content}}</p>
+      </li>
+      }
+      @if (isSending && isWriting) {
+      <li class="message bot">
+        <span>Llm</span>
+        <p>Typing...</p>
+      </li>
+      }
+    </ul>
+  </main>
+
+  <form (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-input [(ngModel)]="currentMessage" name="message" labelPlacement="floating"
+          placeholder="Write your message here..." required>
+          <div slot="label">Message</div>
+        </ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" [disabled]="(currentMessage.trim() === '') || isWriting" type="submit">Send</ion-button>
+  </form>
+</ion-content>
