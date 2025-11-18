@@ -106,12 +106,14 @@ export class ChatsPage implements OnInit {
       this.isSending = false;
       let reply: string = '';
       for await (const value of (response.body as any).pipeThrough(new TextDecoderStream())) {
-        const data: any = value.trim().split('data: ')[1];
-        const [choice] = JSON.parse(data).choices;
-        const content = choice?.delta?.content ?? '';
-        reply += content;
-        botMessage.content = reply;
-        this.scrollToBottom();
+        if (value.includes('data: ')) {
+          const data: any = value.trim().split('data: ')[1];
+          const [choice] = JSON.parse(data).choices;
+          const content = choice?.delta?.content ?? '';
+          reply += content;
+          botMessage.content = reply;
+          this.scrollToBottom();
+        }
       }
       const updatedChats = await this.chatsService.updateChats();
       if (!updatedChats) throw new Error('Error updating chats');
