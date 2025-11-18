@@ -8,6 +8,7 @@ import { ChatConfig } from '../interfaces/chatConfig.interface';
 export class ConfigService {
   public config: ChatConfig = {
     api_url: 'http://localhost:11434/v1/chat/completions',
+    api_token: '',
     selected_model: 'gemma3'
   };
   public readonly CONFIG_STORAGE_KEY: string = 'config';

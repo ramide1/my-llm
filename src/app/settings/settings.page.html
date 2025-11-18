@@ -17,6 +17,12 @@
         </ion-input>
       </ion-item>
       <ion-item>
+        <ion-input [(ngModel)]="configService.config.api_token" name="api_token" labelPlacement="floating"
+          placeholder="Put your OpenAi compatible API Token here..." required>
+          <div slot="label">API Token</div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input [(ngModel)]="configService.config.selected_model" name="selected_model" labelPlacement="floating"
           placeholder="Put selected LLM Model here..." required>
           <div slot="label">LLM Model</div>

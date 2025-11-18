@@ -85,7 +85,8 @@ export class ChatsPage implements OnInit {
       const response: any = await fetch(this.configService.config.api_url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.configService.config.api_token
         },
         body: JSON.stringify({
           model: this.configService.config.selected_model,
